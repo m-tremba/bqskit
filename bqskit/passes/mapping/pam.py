@@ -355,12 +355,12 @@ class PermutationAwareMappingAlgorithm(GeneralizedSabreAlgorithm):
             mapping_score = self._score_perm(circuit, F, pi, D, gperm, E)
             gate_score = mq_gate_counts[i] 
             if gate_score < best_gate_score:
-                best_gate_sscore = gate_score
+                best_gate_score = gate_score
                 current_mapping_score = mapping_score
                 best_perm = gperm
                 best_triple = pre_circ_post_triples[i]
             if gate_score == best_gate_score and mapping_score < current_mapping_score:
-                best_gate_sscore = gate_score
+                best_gate_score = gate_score
                 current_mapping_score = mapping_score
                 best_perm = gperm
                 best_triple = pre_circ_post_triples[i]
