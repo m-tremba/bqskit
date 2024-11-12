@@ -347,21 +347,21 @@ class PermutationAwareMappingAlgorithm(GeneralizedSabreAlgorithm):
         # Calculate best scoring permutation
         best_triple = pre_circ_post_triples[0]
         best_perm = (best_triple[0], best_triple[2])
-        current_mapping_score = self._score_perm(circuit, F, pi, D, best_perm, E)
-        best_gate_score = mq_gate_counts[0] * self.gate_count_weight / len(F)
+        best_mapping_score = self._score_perm(circuit, F, pi, D, best_perm, E)
+        current_gate_score = mq_gate_counts[0] * self.gate_count_weight / len(F)
 
         for i in range(1, len(pre_circ_post_triples)):
             gperm = (pre_circ_post_triples[i][0], pre_circ_post_triples[i][2])
             mapping_score = self._score_perm(circuit, F, pi, D, gperm, E)
             gate_score = mq_gate_counts[i] 
-            if gate_score < best_gate_score:
-                best_gate_sscore = gate_score
-                current_mapping_score = mapping_score
+            if mapping_score < best_mapping_score:
+                best_mapping_score = mapping_score
+                current_gate_score = gate_score
                 best_perm = gperm
                 best_triple = pre_circ_post_triples[i]
-            if gate_score == best_gate_score and mapping_score < current_mapping_score:
-                best_gate_sscore = gate_score
-                current_mapping_score = mapping_score
+            if mapping_score == best_mapping_score and gate_score < current_gate_score:
+                best_mapping_score = mapping_score
+                current_gate_score = gate_score
                 best_perm = gperm
                 best_triple = pre_circ_post_triples[i]
         return best_triple
