@@ -20,6 +20,7 @@ from bqskit.passes.mapping.sabre import GeneralizedSabreAlgorithm
 from bqskit.qis.graph import CouplingGraph
 from bqskit.qis.unitary.unitarymatrix import UnitaryMatrix
 
+from random import randint
 _logger = logging.getLogger(__name__)
 
 
@@ -350,20 +351,25 @@ class PermutationAwareMappingAlgorithm(GeneralizedSabreAlgorithm):
         current_mapping_score = self._score_perm(circuit, F, pi, D, best_perm, E)
         best_gate_score = mq_gate_counts[0] * self.gate_count_weight / len(F)
 
+        candidate_triples = [best_triple]
+
+        # Create candidate list of triples tied for lowest gate cost
         for i in range(1, len(pre_circ_post_triples)):
             gperm = (pre_circ_post_triples[i][0], pre_circ_post_triples[i][2])
             mapping_score = self._score_perm(circuit, F, pi, D, gperm, E)
             gate_score = mq_gate_counts[i] 
             if gate_score < best_gate_score:
                 best_gate_score = gate_score
-                current_mapping_score = mapping_score
+                best_perm = gperm
+                candidate_triples = [pre_circ_post_triples[i]]
+            if gate_score == best_gate_score:
                 best_perm = gperm
                 best_triple = pre_circ_post_triples[i]
-            if gate_score == best_gate_score and mapping_score < current_mapping_score:
-                best_gate_score = gate_score
-                current_mapping_score = mapping_score
-                best_perm = gperm
-                best_triple = pre_circ_post_triples[i]
+                candidate_triples += [pre_circ_post_triples[i]]
+
+        # Randomly select block from candidate list
+        best_triple = candidate_triples[randint(0, len(candidate_triples)-1)]
+
         return best_triple
 
     def _score_perm(
