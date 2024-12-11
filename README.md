@@ -1,4 +1,4 @@
-# Berkeley Quantum Synthesis Toolkit (BQSKit) PAM Variants
+# BQSKit Fork - PAM Variants
 
 This fork of BQSKit implements variants of Permutation-Aware Mapping (PAM [1]. 
 
