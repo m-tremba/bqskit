@@ -348,7 +348,7 @@ class PermutationAwareMappingAlgorithm(GeneralizedSabreAlgorithm):
         best_triple = pre_circ_post_triples[0]
         best_perm = (best_triple[0], best_triple[2])
         best_mapping_score = self._score_perm(circuit, F, pi, D, best_perm, E)
-        current_gate_score = mq_gate_counts[0] * self.gate_count_weight / len(F)
+        current_gate_score = mq_gate_counts[0]
 
         for i in range(1, len(pre_circ_post_triples)):
             gperm = (pre_circ_post_triples[i][0], pre_circ_post_triples[i][2])
