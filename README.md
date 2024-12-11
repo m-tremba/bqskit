@@ -1,6 +1,6 @@
 # BQSKit Fork - PAM Variants
 
-This fork of BQSKit implements variants of Permutation-Aware Mapping (PAM [1]. 
+This fork of BQSKit implements variants of Permutation-Aware Mapping (PAM) [1]. 
 
 [1] J. Liu, E. Younis, M. Weiden, P. Hovland, J. Kubiatowicz and C. Iancu, 
 "Tackling the Qubit Mapping Problem with Permutation-Aware Synthesis," 2023 IEEE 
@@ -61,4 +61,4 @@ compiled_circuit.save("output.qasm")
 ## Other Information
 
 For all other information, including citations, licenses, and copyright,
-see the parent BQSKit repo.
+see the parent [BQSKit repo](https://github.com/BQSKit/bqskit),
